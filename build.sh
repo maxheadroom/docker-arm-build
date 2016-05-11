@@ -26,7 +26,8 @@ function build_container() {
 # publish the new docker container
 function publish_container() {
   echo "Publishing Docker Container with version: ${GO_PIPELINE_LABEL}"
-  docker push ubirch/arm-build:v${GO_PIPELINE_LABEL}
+  docker push ${CONTAINER_NAME}:v${GO_PIPELINE_LABEL}
+
 
   if [ $? -eq 0 ]; then
     echo ${GO_PIPELINE_LABEL} > VAR/GO_PIPELINE_NAME_${GO_PIPELINE_NAME}
@@ -34,7 +35,11 @@ function publish_container() {
     echo "Docker push faild"
     exit 1
   fi
+  docker push ${CONTAINER_NAME}
 
+  if [ $? -ne 0 ]; then
+    echo "Docker push to tag latest failed"
+    exit 1
 }
 
 

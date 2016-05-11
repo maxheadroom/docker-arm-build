@@ -40,6 +40,7 @@ function publish_container() {
   if [ $? -ne 0 ]; then
     echo "Docker push to tag latest failed"
     exit 1
+  fi
 }
 
 

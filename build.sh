@@ -1,18 +1,22 @@
 #!/bin/bash -x
 
-
+CONTAINER_NAME=ubirch/arm-build
 
 # build the docker container
 function build_container() {
 
     echo "Building ARM/NXP Tools container"
 
-    mkdir -p VAR && docker build -t ubirch/arm-build:v${GO_PIPELINE_LABEL} .
+    mkdir -p VAR &&
+    IMAGEID=`docker build  . | grep "Successfully built" | cut -d' ' -f3`
+
 
 
     if [ $? -eq 0 ]; then
         echo ${GO_PIPELINE_LABEL} > VAR/${GO_PIPELINE_NAME}_${GO_STAGE_NAME}
-    else
+        docker tag ${IMAGEID} ${CONTAINER_NAME}:latest
+        docker tag ${IMAGEID} ${CONTAINER_NAME}:v${GO_PIPELINE_LABEL:v0}
+     else
         echo "Docker build failed"
         exit 1
     fi

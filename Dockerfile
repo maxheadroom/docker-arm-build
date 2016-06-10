@@ -2,11 +2,14 @@ FROM debian:jessie
 MAINTAINER Falko Zurell <falko.zurell@ubirch.com>
 
 LABEL description="uBirch ARM/NXP build container"
-RUN apt-get update && apt-get install  gcc-arm-none-eabi cgdb wget xz-utils git cmake doxygen graphviz -y && \
+RUN apt-get update && apt-get install  gcc-arm-none-eabi cgdb wget xz-utils git cmake graphviz -y && \
     apt-get autoclean && apt-get --purge -y autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /opt
+RUN wget "http://ftp.stack.nl/pub/users/dimitri/doxygen-1.8.11.linux.bin.tar.gz"
+RUN tar xvfz doxygen-1.8.11.linux.bin.tar.gz
+RUN cp doxygen-1.8.11/bin/* /usr/bin
 RUN git config --system user.name Docker && git config --system user.email docker@localhost
 
 RUN mkdir /build

@@ -9,6 +9,7 @@ RUN apt-get install wget -y
 RUN apt-get install xz-utils -y
 RUN apt-get install git -y
 RUN apt-get install make -y
+RUN apt-get install gcc -y
 RUN apt-get install graphviz -y
 WORKDIR /opt
 RUN wget "https://cmake.org/files/v3.6/cmake-3.6.1-Linux-x86_64.tar.gz"

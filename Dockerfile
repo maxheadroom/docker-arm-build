@@ -2,10 +2,14 @@ FROM debian:jessie
 MAINTAINER Falko Zurell <falko.zurell@ubirch.com>
 
 LABEL description="uBirch ARM/NXP build container"
-RUN apt-get update && apt-get install  gcc-arm-none-eabi cgdb wget xz-utils git make graphviz -y && \
-    apt-get autoclean && apt-get --purge -y autoremove && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+RUN apt-get update
+RUN apt-get install gcc-arm-none-eabi -y
+RUN apt-get install cgdb -y
+RUN apt-get install wget -y
+RUN apt-get install xz-utils -y
+RUN apt-get install git -y
+RUN apt-get install make -y
+RUN apt-get install graphviz -y
 WORKDIR /opt
 RUN wget "https://cmake.org/files/v3.6/cmake-3.6.1-Linux-x86_64.tar.gz"
 RUN tar xvfz cmake-3.6.1-Linux-x86_64.tar.gz

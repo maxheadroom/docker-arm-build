@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Falko Zurell <falko.zurell@ubirch.com>
 
-LABEL description="uBirch ARM/NXP build container"
+LABEL description="uBirch ARM gcc build container"
 RUN apt-get update
 RUN apt-get install gcc-arm-none-eabi -y
 RUN apt-get install cgdb -y
